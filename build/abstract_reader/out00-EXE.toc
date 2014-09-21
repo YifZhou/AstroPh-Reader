@@ -1,0 +1,9 @@
+('/home/yzhou/Documents/Reader/dist/abstract_reader',
+ False,
+ False,
+ None,
+ None,
+ [],
+ None,
+ False,
+ 1409028955)
