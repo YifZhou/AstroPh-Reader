@@ -54,7 +54,7 @@ class ArxivCollector(QtGui.QMainWindow):
         self.category.currentIndexChanged.connect(self.refresh)
             
         self.list = QtGui.QListWidget(self.Main_Window)
-        self.list.itemDoubleClicked[QtGui.QListWidgetItem].connect(self.test)
+        # self.list.itemDoubleClicked[QtGui.QListWidgetItem].connect(self.test) 
         self.list.setMinimumHeight(500)
         self.list.setFixedWidth(400)
         self.refresh_btn = QtGui.QPushButton("Refresh", self.Main_Window)
@@ -68,8 +68,8 @@ class ArxivCollector(QtGui.QMainWindow):
         self.Main_Window.setLayout(vbox)
         self.setCentralWidget(self.Main_Window)
 
-    def test(self, item):
-        print item.text()
+    # def test(self, item):
+    #     print item.text()
 
     def refresh(self):
         self.CollectAbs()
@@ -85,7 +85,7 @@ class ArxivCollector(QtGui.QMainWindow):
         try:
             body = BS(requests.get(url, timeout = 15).text).body
             self.links = map(lambda html:'http://arxiv.org/' + html.contents[2].a.attrs['href'], body.findAll('dt'))
-            self.titles = map(lambda html: html.div.div.text.strip(), body.findAll('dd'))
+            self.titles = map(lambda html: html.div.div.text.strip()[7:], body.findAll('dd'))
             self.abs_contents = map(lambda html: html.div.p, body.findAll('dd'))
             self.n_abs = len(self.titles)
 
